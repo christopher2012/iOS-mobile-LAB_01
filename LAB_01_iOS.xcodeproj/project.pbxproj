@@ -14,6 +14,7 @@
 		AC176BD61FE3C6550068EF74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC176BD41FE3C6550068EF74 /* LaunchScreen.storyboard */; };
 		AC176BE11FE3C6550068EF74 /* LAB_01_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC176BE01FE3C6550068EF74 /* LAB_01_iOSTests.swift */; };
 		AC176BEC1FE3C6550068EF74 /* LAB_01_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC176BEB1FE3C6550068EF74 /* LAB_01_iOSUITests.swift */; };
+		AC176C001FE3CBFE0068EF74 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC176BFB1FE3C9660068EF74 /* libsqlite3.0.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,8 @@
 		AC176BE71FE3C6550068EF74 /* LAB_01_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LAB_01_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC176BEB1FE3C6550068EF74 /* LAB_01_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAB_01_iOSUITests.swift; sourceTree = "<group>"; };
 		AC176BED1FE3C6550068EF74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC176BFB1FE3C9660068EF74 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		AC176BFD1FE3CA080068EF74 /* LAB_01_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LAB_01_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC176C001FE3CBFE0068EF74 /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +85,8 @@
 				AC176BDF1FE3C6550068EF74 /* LAB_01_iOSTests */,
 				AC176BEA1FE3C6550068EF74 /* LAB_01_iOSUITests */,
 				AC176BC91FE3C6550068EF74 /* Products */,
+				AC176BFA1FE3C9660068EF74 /* Frameworks */,
+				AC176BFD1FE3CA080068EF74 /* LAB_01_iOS-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +129,14 @@
 				AC176BED1FE3C6550068EF74 /* Info.plist */,
 			);
 			path = LAB_01_iOSUITests;
+			sourceTree = "<group>";
+		};
+		AC176BFA1FE3C9660068EF74 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AC176BFB1FE3C9660068EF74 /* libsqlite3.0.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +207,7 @@
 				TargetAttributes = {
 					AC176BC71FE3C6550068EF74 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					AC176BDB1FE3C6550068EF74 = {
@@ -412,10 +427,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = LAB_01_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "agh.LAB-01-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LAB_01_iOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -424,10 +442,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = LAB_01_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "agh.LAB-01-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LAB_01_iOS-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
