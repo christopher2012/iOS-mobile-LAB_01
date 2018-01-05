@@ -15,6 +15,9 @@
 		AC176BE11FE3C6550068EF74 /* LAB_01_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC176BE01FE3C6550068EF74 /* LAB_01_iOSTests.swift */; };
 		AC176BEC1FE3C6550068EF74 /* LAB_01_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC176BEB1FE3C6550068EF74 /* LAB_01_iOSUITests.swift */; };
 		AC176C001FE3CBFE0068EF74 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC176BFB1FE3C9660068EF74 /* libsqlite3.0.tbd */; };
+		AC41E4E21FFF777800E188D6 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC41E4E11FFF777800E188D6 /* Sensor.swift */; };
+		AC41E4E41FFF7A2300E188D6 /* ReadingsControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC41E4E31FFF7A2300E188D6 /* ReadingsControllerTableViewController.swift */; };
+		AC41E4E61FFF7CE500E188D6 /* ReadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC41E4E51FFF7CE500E188D6 /* ReadingTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,9 @@
 		AC176BED1FE3C6550068EF74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC176BFB1FE3C9660068EF74 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		AC176BFD1FE3CA080068EF74 /* LAB_01_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LAB_01_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		AC41E4E11FFF777800E188D6 /* Sensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
+		AC41E4E31FFF7A2300E188D6 /* ReadingsControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingsControllerTableViewController.swift; sourceTree = "<group>"; };
+		AC41E4E51FFF7CE500E188D6 /* ReadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +115,9 @@
 				AC176BD21FE3C6550068EF74 /* Assets.xcassets */,
 				AC176BD41FE3C6550068EF74 /* LaunchScreen.storyboard */,
 				AC176BD71FE3C6550068EF74 /* Info.plist */,
+				AC41E4E11FFF777800E188D6 /* Sensor.swift */,
+				AC41E4E31FFF7A2300E188D6 /* ReadingsControllerTableViewController.swift */,
+				AC41E4E51FFF7CE500E188D6 /* ReadingTableViewCell.swift */,
 			);
 			path = LAB_01_iOS;
 			sourceTree = "<group>";
@@ -274,7 +283,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC41E4E61FFF7CE500E188D6 /* ReadingTableViewCell.swift in Sources */,
 				AC176BCE1FE3C6550068EF74 /* ViewController.swift in Sources */,
+				AC41E4E21FFF777800E188D6 /* Sensor.swift in Sources */,
+				AC41E4E41FFF7A2300E188D6 /* ReadingsControllerTableViewController.swift in Sources */,
 				AC176BCC1FE3C6550068EF74 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -525,6 +537,7 @@
 				AC176BF21FE3C6550068EF74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AC176BF31FE3C6550068EF74 /* Build configuration list for PBXNativeTarget "LAB_01_iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -533,6 +546,7 @@
 				AC176BF51FE3C6550068EF74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AC176BF61FE3C6550068EF74 /* Build configuration list for PBXNativeTarget "LAB_01_iOSUITests" */ = {
 			isa = XCConfigurationList;
@@ -541,6 +555,7 @@
 				AC176BF81FE3C6550068EF74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

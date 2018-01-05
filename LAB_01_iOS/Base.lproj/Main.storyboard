@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item 2-->
+        <!--Sensors-->
         <scene sceneID="oCr-gR-cP3">
             <objects>
                 <viewController id="Nuz-f9-Qbw" sceneMemberID="viewController">
@@ -22,37 +22,85 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="wng-Gv-Fs5"/>
+                    <tabBarItem key="tabBarItem" title="Sensors" id="wng-Gv-Fs5"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAv-CG-2b7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="100" y="17"/>
+            <point key="canvasLocation" x="102" y="101"/>
         </scene>
-        <!--Item 1-->
-        <scene sceneID="HpA-T5-1gO">
+        <!--Root View Controller-->
+        <scene sceneID="bFN-Hs-DfT">
             <objects>
-                <viewController id="542-Cx-AUx" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qi4-4K-yj7"/>
-                        <viewControllerLayoutGuide type="bottom" id="yPb-Rt-hH5"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="1Eg-on-CxI">
+                <tableViewController id="v3C-I5-8f3" customClass="ReadingsControllerTableViewController" customModule="LAB_01_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="135" sectionHeaderHeight="28" sectionFooterHeight="28" id="z7v-bf-aMJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M0L-iU-t2s">
-                                <rect key="frame" x="16" y="0.0" width="343" height="659"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="P6i-n1-iqp"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X2J-1X-lZy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="default" indentationWidth="10" rowHeight="135" id="B4C-CX-nxN" customClass="ReadingTableViewCell" customModule="LAB_01_iOS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="135"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B4C-CX-nxN" id="Lhs-sJ-Vfd">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="date" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hrL-aQ-ZNQ">
+                                            <rect key="frame" x="8" y="0.0" width="359" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="value" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oFp-vz-LcX">
+                                            <rect key="frame" x="8" y="38" width="359" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="sensor" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H2G-QZ-BE3">
+                                            <rect key="frame" x="8" y="76" width="359" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="DateText" destination="hrL-aQ-ZNQ" id="pgV-HN-ukH"/>
+                                    <outlet property="SensorText" destination="H2G-QZ-BE3" id="VmD-xa-LGO"/>
+                                    <outlet property="ValueText" destination="oFp-vz-LcX" id="Udm-8V-yRw"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="v3C-I5-8f3" id="qfL-KL-cHu"/>
+                            <outlet property="delegate" destination="v3C-I5-8f3" id="PQC-db-SMw"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="GcV-N5-V11"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ci4-r8-qzC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-264.80000000000001" y="-634.632683658171"/>
+            <point key="canvasLocation" x="447.19999999999999" y="-789.35532233883066"/>
+        </scene>
+        <!--Readings-->
+        <scene sceneID="ibp-lX-CbP">
+            <objects>
+                <navigationController id="aD8-Ez-aeS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Readings" id="FjO-Y7-hua"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oKA-8p-9rX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="v3C-I5-8f3" kind="relationship" relationship="rootViewController" id="BVq-L1-IOg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rme-hX-4dD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-504" y="-789"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ZCe-9t-hi8">
@@ -65,13 +113,15 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="lzk-vJ-chf"/>
+                        <segue destination="Nuz-f9-Qbw" kind="relationship" relationship="viewControllers" id="vhZ-Yp-T4R"/>
+                        <segue destination="aD8-Ez-aeS" kind="relationship" relationship="viewControllers" id="Mm8-nf-9Mz"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8EP-hG-7AQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1639" y="-413"/>
         </scene>
-        <!--Item-->
+        <!--Utilities-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LAB_01_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -119,14 +169,14 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="dOi-w0-eEE"/>
+                    <tabBarItem key="tabBarItem" title="Utilities" id="dOi-w0-eEE"/>
                     <connections>
                         <outlet property="numberOfRecordText" destination="rLe-UG-n7t" id="Ivt-P4-NSr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-554" y="438"/>
+            <point key="canvasLocation" x="-1010" y="319"/>
         </scene>
     </scenes>
 </document>
