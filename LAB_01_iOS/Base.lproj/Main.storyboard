@@ -9,25 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Sensors-->
-        <scene sceneID="oCr-gR-cP3">
-            <objects>
-                <viewController id="Nuz-f9-Qbw" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6tm-AD-HCq"/>
-                        <viewControllerLayoutGuide type="bottom" id="Fpa-e6-V0M"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="qDF-ET-yX8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Sensors" id="wng-Gv-Fs5"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SAv-CG-2b7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="102" y="101"/>
-        </scene>
         <!--Root View Controller-->
         <scene sceneID="bFN-Hs-DfT">
             <objects>
@@ -37,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="default" indentationWidth="10" rowHeight="135" id="B4C-CX-nxN" customClass="ReadingTableViewCell" customModule="LAB_01_iOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReadingTableViewCell" rowHeight="135" id="B4C-CX-nxN" customClass="ReadingTableViewCell" customModule="LAB_01_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="135"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B4C-CX-nxN" id="Lhs-sJ-Vfd">
@@ -113,7 +94,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="lzk-vJ-chf"/>
-                        <segue destination="Nuz-f9-Qbw" kind="relationship" relationship="viewControllers" id="vhZ-Yp-T4R"/>
+                        <segue destination="apr-hh-nfT" kind="relationship" relationship="viewControllers" id="vZY-pA-mqP"/>
                         <segue destination="aD8-Ez-aeS" kind="relationship" relationship="viewControllers" id="Mm8-nf-9Mz"/>
                     </connections>
                 </tabBarController>
@@ -152,11 +133,17 @@
                                 <rect key="frame" x="44" y="85" width="113" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add to database"/>
+                                <connections>
+                                    <action selector="saveReadingButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xAe-4G-9GG"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4H-gD-PhM">
-                                <rect key="frame" x="202" y="85" width="120" height="30"/>
+                                <rect key="frame" x="202" y="83" width="120" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Delete all records"/>
+                                <connections>
+                                    <action selector="deleteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Abb-PY-fQc"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SPi-QR-uHa">
                                 <rect key="frame" x="16" y="123" width="343" height="414"/>
@@ -172,11 +159,84 @@
                     <tabBarItem key="tabBarItem" title="Utilities" id="dOi-w0-eEE"/>
                     <connections>
                         <outlet property="numberOfRecordText" destination="rLe-UG-n7t" id="Ivt-P4-NSr"/>
+                        <outlet property="outputText" destination="SPi-QR-uHa" id="2qJ-lt-juc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1010" y="319"/>
+            <point key="canvasLocation" x="-1639" y="451"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="07l-df-qcB">
+            <objects>
+                <tableViewController id="Hhg-Ue-is8" customClass="SensorTableViewController" customModule="LAB_01_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1OK-EU-xOa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SensorTableViewCell" id="4qe-n0-Rbg" customClass="SensorTableViewCell" customModule="LAB_01_iOS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4qe-n0-Rbg" id="YXz-gZ-dyq">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zMH-67-c1x">
+                                            <rect key="frame" x="8" y="5" width="97" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <accessibility key="accessibilityConfiguration">
+                                                <bool key="isElement" value="NO"/>
+                                            </accessibility>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bj8-7k-GMb">
+                                            <rect key="frame" x="149" y="5" width="218" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <accessibility key="accessibilityConfiguration">
+                                                <bool key="isElement" value="NO"/>
+                                            </accessibility>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="descText" destination="bj8-7k-GMb" id="StE-hO-gwa"/>
+                                    <outlet property="nameText" destination="zMH-67-c1x" id="ENZ-oK-dLw"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Hhg-Ue-is8" id="GqQ-Ld-bBD"/>
+                            <outlet property="delegate" destination="Hhg-Ue-is8" id="LQ3-hf-eHE"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="M8b-bh-nWd"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kci-cU-SJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="944.79999999999995" y="354.87256371814095"/>
+        </scene>
+        <!--Sensors-->
+        <scene sceneID="nmc-wx-mZm">
+            <objects>
+                <navigationController id="apr-hh-nfT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Sensors" id="HwP-Wh-N0L"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hJF-o6-mp5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Hhg-Ue-is8" kind="relationship" relationship="rootViewController" id="DO1-Gv-p5Q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fCU-SE-xUS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7" y="355"/>
         </scene>
     </scenes>
 </document>

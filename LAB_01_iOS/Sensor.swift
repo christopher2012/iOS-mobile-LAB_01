@@ -19,18 +19,18 @@ class Sensor {
         self.desc = description
     }
     
-    static func generateTwentySensors() -> [Sensor] {
+    static func generateSensors() -> [Sensor] {
         var result: [Sensor] = []
-        for i in 1...20 {
-            let sensorName = "S"  + String(i)
-            let description = "Sensor number " + String(i)
+        for i in 0...19 {
+            let sensorName = "S"  + String(i + 1)
+            let description = "Sensor number " + String(i + 1)
             let sensor = Sensor(id: i, name: sensorName, description: description)
             result.append(sensor)
         }
         return result;
     }
 
-    static func createSensorTable(db: OpaquePointer?) {
+    static func createTable(db: OpaquePointer?) {
         let createSQL = "CREATE TABLE sensor(id INTEGER PRIMARY KEY, name VARCHAR(255), desc VARCHAR(255));"
         sqlite3_exec(db, createSQL, nil, nil, nil)
     }
