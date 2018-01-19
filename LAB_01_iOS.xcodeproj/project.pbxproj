@@ -21,6 +21,7 @@
 		AC41E4E21FFF777800E188D6 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC41E4E11FFF777800E188D6 /* Sensor.swift */; };
 		AC41E4E41FFF7A2300E188D6 /* ReadingsControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC41E4E31FFF7A2300E188D6 /* ReadingsControllerTableViewController.swift */; };
 		AC41E4E61FFF7CE500E188D6 /* ReadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC41E4E51FFF7CE500E188D6 /* ReadingTableViewCell.swift */; };
+		AC7E6C512011F1590097048A /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E6C502011F1590097048A /* CustomTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		AC41E4E11FFF777800E188D6 /* Sensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
 		AC41E4E31FFF7A2300E188D6 /* ReadingsControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingsControllerTableViewController.swift; sourceTree = "<group>"; };
 		AC41E4E51FFF7CE500E188D6 /* ReadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingTableViewCell.swift; sourceTree = "<group>"; };
+		AC7E6C502011F1590097048A /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 			children = (
 				AC176BCB1FE3C6550068EF74 /* AppDelegate.swift */,
 				AC176BCD1FE3C6550068EF74 /* ViewController.swift */,
+				AC7E6C502011F1590097048A /* CustomTabBarController.swift */,
 				AC176BCF1FE3C6550068EF74 /* Main.storyboard */,
 				AC176BD21FE3C6550068EF74 /* Assets.xcassets */,
 				AC176BD41FE3C6550068EF74 /* LaunchScreen.storyboard */,
@@ -300,6 +303,7 @@
 				AC41E4E21FFF777800E188D6 /* Sensor.swift in Sources */,
 				AC41E4E41FFF7A2300E188D6 /* ReadingsControllerTableViewController.swift in Sources */,
 				AC176BCC1FE3C6550068EF74 /* AppDelegate.swift in Sources */,
+				AC7E6C512011F1590097048A /* CustomTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

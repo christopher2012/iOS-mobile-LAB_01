@@ -15,8 +15,9 @@ class SensorTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        sensors = Sensor.generateSensors()
+                
+        let tbvc = self.tabBarController as! CustomTabBarController
+        sensors = tbvc.sensors
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -40,7 +41,6 @@ class SensorTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
-        
         return sensors.count
     }
 
@@ -48,8 +48,6 @@ class SensorTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "SensorTableViewCell", for: indexPath) as? SensorTableViewCell
-        
-        print("something")
         
         cell?.nameText.text = sensors[indexPath.row].name
         cell?.descText.text = sensors[indexPath.row].desc

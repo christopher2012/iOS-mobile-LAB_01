@@ -10,16 +10,22 @@ import UIKit
 
 class ReadingsControllerTableViewController: UITableViewController {
 
-    var sensors: [String] = ["ala", "kot"]
+    var readings: [Reading] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let tbvc = self.tabBarController as! CustomTabBarController
+        readings = tbvc.readings
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,16 +42,16 @@ class ReadingsControllerTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return sensors.count
+        return readings.count
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReadingTableViewCell", for: indexPath) as? ReadingTableViewCell
         
-        print("something")
-        
-        cell?.DateText.text = sensors[indexPath.row]
+        cell?.SensorText.text = "sensor: " + String(readings[indexPath.row].sensor)
+        cell?.ValueText.text = "value: " + String(readings[indexPath.row].value)
+        cell?.DateText.text = "date: " + String(describing: NSDate(timeIntervalSince1970: TimeInterval(readings[indexPath.row].ts)))
 
         return cell!
         
