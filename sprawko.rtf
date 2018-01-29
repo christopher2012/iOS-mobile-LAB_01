@@ -1,0 +1,61 @@
+{\rtf1\ansi\ansicpg1250\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Bold;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;\red196\green26\blue22;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww15300\viewh13040\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+\pard\tx543\pardeftab543\pardirnatural\partightenfactor0
+
+\f1\b\fs22 \cf0 \CocoaLigature0 /Users/Guest/Library/Developer/CoreSimulator/Devices/A78C57F0-C7FF-4165-9F72-35B3C43C99E0/data/Containers/Data/Application/1E581A32-9060-41A2-B36E-E54BA4E40846/Documents/demo_wizner1.db
+\f0\b0\fs24 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+\pard\tx543\pardeftab543\pardirnatural\partightenfactor0
+
+\f1\b\fs22 \cf0 \CocoaLigature0 1000 records\
+\
+saving files to database time: 0.0091019868850708\
+\
+Min and max timestamp: Min: 1485709448.0; Max: 1517183253.0, time: 0.000266909599304199\
+\pard\tx543\pardeftab543\pardirnatural\partightenfactor0
+
+\f2\b0 \cf2 "select MIN(timestamp), MAX(timestamp) from readings;"
+\f1\b \cf0 \
+\
+Average readings from all sensors: 486.1, time: 0.00011897087097168\
+
+\f2\b0 \cf2 "select avg(value) from readings;"
+\f1\b \cf0 \
+\
+\
+Number of readings and average value per each sensor: \
+
+\f2\b0 \cf2 "Select sensor.name, count(readings.timestamp), avg(readings.value) from readings left join sensor ON sensorid=sensor.id group by sensor.name;"\cf0 \
+\pard\tx543\pardeftab543\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \
+["Name S10 ; readings: 57 ; avg: 569.684210526316", "Name S11 ; readings: 65 ; avg: 456.815384615385", "Name S12 ; readings: 55 ; avg: 453.636363636364", "Name S13 ; readings: 56 ; avg: 460.214285714286", "Name S14 ; readings: 34 ; avg: 512.794117647059", "Name S15 ; readings: 55 ; avg: 550.527272727273", "Name S16 ; readings: 46 ; avg: 460.826086956522", "Name S17 ; readings: 52 ; avg: 448.788461538462", "Name S18 ; readings: 51 ; avg: 494.882352941176", "Name S19 ; readings: 70 ; avg: 479.7", "Name S2 ; readings: 54 ; avg: 506.796296296296", "Name S3 ; readings: 40 ; avg: 471.975", "Name S4 ; readings: 53 ; avg: 515.811320754717", "Name S5 ; readings: 61 ; avg: 452.590163934426", "Name S6 ; readings: 41 ; avg: 561.658536585366", "Name S7 ; readings: 62 ; avg: 507.258064516129", "Name S8 ; readings: 47 ; avg: 449.510638297872", "Name S9 ; readings: 59 ; avg: 466.050847457627"]\
+\
+time: 0.000861048698425293\
+\
+\
+\
+\
+1000000 records\
+\
+saving files to database time: 6.76355302333832\
+\
+Min and max timestamp: Min: 1485663622.0; Max: 1517220516.0, time: 0.122387051582336\
+\
+Average readings from all sensors: 499.120186, time: 0.068930983543396\
+\
+Number of readings and average value per each sensor:\
+ \
+["Name S10 ; readings: 52588 ; avg: 500.031528105271", "Name S11 ; readings: 52297 ; avg: 498.058014800084", "Name S12 ; readings: 52661 ; avg: 499.649854731205", "Name S13 ; readings: 53009 ; avg: 499.648361598974", "Name S14 ; readings: 52974 ; avg: 499.171612489146", "Name S15 ; readings: 52623 ; avg: 501.401478440986", "Name S16 ; readings: 52577 ; avg: 499.063963329973", "Name S17 ; readings: 52654 ; avg: 497.450032286246", "Name S18 ; readings: 52748 ; avg: 496.946443467051", "Name S19 ; readings: 52838 ; avg: 498.214712896022", "Name S2 ; readings: 52739 ; avg: 499.812965736931", "Name S3 ; readings: 52730 ; avg: 501.161160629623", "Name S4 ; readings: 52397 ; avg: 500.294997805218", "Name S5 ; readings: 52582 ; avg: 501.208892776996", "Name S6 ; readings: 52720 ; avg: 499.402617602428", "Name S7 ; readings: 52580 ; avg: 496.902776721187", "Name S8 ; readings: 51913 ; avg: 498.123379500318", "Name S9 ; readings: 52747 ; avg: 497.954613532523"]\
+\
+time: 0.955238938331604\
+\
+}

@@ -12,6 +12,7 @@ class CustomTabBarController: UITabBarController {
     
     var sensors: [Sensor] = []
     var readings: [Reading] = []
+    var db: OpaquePointer? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()

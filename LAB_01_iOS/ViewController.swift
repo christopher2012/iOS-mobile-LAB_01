@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         let docDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let dbFilePath = NSURL(fileURLWithPath: docDir).appendingPathComponent("demo5.db")?.path
+        let dbFilePath = NSURL(fileURLWithPath: docDir).appendingPathComponent("demo_wizner1.db")?.path
 
         print(dbFilePath ?? "")
         
@@ -41,6 +41,7 @@ class ViewController: UIViewController {
                 print("create table sensor")
                 sensors = Sensor.generateSensors()
                 Sensor.saveSensorsToDB(db: db, sensors: sensors)
+                sensors = Sensor.readSensorsFromDB(db: db)
             } else {
                 sensors = Sensor.readSensorsFromDB(db: db)
                 print("reading sensors from db")
@@ -57,6 +58,7 @@ class ViewController: UIViewController {
             let tbvc = tabBarController as! CustomTabBarController
             tbvc.sensors = self.sensors
             tbvc.readings = self.readings
+            tbvc.db = self.db
             
         }
         
@@ -72,6 +74,8 @@ class ViewController: UIViewController {
         Reading.deleteRecords(db: db)
         self.readings = []
         outputText.text = ""
+        let tbvc = tabBarController as! CustomTabBarController
+        tbvc.readings = self.readings
     }
     
     

@@ -12,6 +12,7 @@ class ReadingsControllerTableViewController: UITableViewController {
 
     var readings: [Reading] = []
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +27,26 @@ class ReadingsControllerTableViewController: UITableViewController {
         let tbvc = self.tabBarController as! CustomTabBarController
         readings = tbvc.readings
         self.tableView.reloadData()
+        let db = tbvc.db;
+        
+        var startTime = NSDate()
+        let findMinMaxTimestampText = Reading.findMinMaxTimestamp(db: db)
+        let findMinMaxTimestamp = NSDate().timeIntervalSince(startTime as Date)
+        
+        startTime = NSDate()
+        let avgReadingAllSensorsText = Reading.avgReadingAllSensors(db: db)
+        let avgReadingAllSensors = NSDate().timeIntervalSince(startTime as Date)
+        
+        startTime = NSDate()
+        let readingsAvgEachSensorText = Reading.readingsAvgEachSensor(db: db)
+        let readingsAvgEachSensor = NSDate().timeIntervalSince(startTime as Date)
+        
+        print("Min and max timestamp: \(findMinMaxTimestampText), time: \(findMinMaxTimestamp)")
+        print("Average readings from all sensors: \(avgReadingAllSensorsText), time: \(avgReadingAllSensors)")
+        print("Number of readings and average value per each sensor: \(readingsAvgEachSensorText), time: \(readingsAvgEachSensor)")
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

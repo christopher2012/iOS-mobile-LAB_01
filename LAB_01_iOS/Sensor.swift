@@ -23,7 +23,7 @@ class Sensor {
         var result: [Sensor] = []
         for i in 0...19 {
             let sensorName = "S"  + String(i + 1)
-            let description = "Sensor number " + String(i + 1)
+            let description = " Sensor number " + String(i + 1)
             let sensor = Sensor(id: i, name: sensorName, description: description)
             result.append(sensor)
         }
@@ -73,8 +73,9 @@ class Sensor {
         
         if sqlite3_prepare_v2(db, insertStatementString, -1, &stmt, nil) == SQLITE_OK {
             for sensor in sensors {
+                let name11 = sensor.name;
                 sqlite3_bind_int(stmt, 1, Int32(sensor.id))
-                sqlite3_bind_text(stmt, 2, sensor.name, -1, nil)
+                sqlite3_bind_text(stmt, 2, name11, -1, nil)
                 sqlite3_bind_text(stmt, 3, sensor.desc, -1, nil)
                 if !(sqlite3_step(stmt) == SQLITE_DONE) {
                     print("something goes wrong")
