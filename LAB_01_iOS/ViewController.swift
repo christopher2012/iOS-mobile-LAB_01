@@ -7,60 +7,41 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var numberOfRecordText: UITextField!
     @IBOutlet weak var outputText: UITextView!
     
-    var db: OpaquePointer? = nil
-    var sensors: [Sensor] = []
-    var readings: [Reading] = []
+    var sensors: [SensorEntity] = []
+    var readings: [ReadingEntity] = []
+    var readingObjects: [Reading] = []
+    var moc: NSManagedObjectContext? = nil
+    var ad: AppDelegate? = nil
+    var readingEntityDescription: NSEntityDescription? = nil;
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        let docDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let dbFilePath = NSURL(fileURLWithPath: docDir).appendingPathComponent("demo_wizner1.db")?.path
 
-        print(dbFilePath ?? "")
+        ad = UIApplication.shared.delegate as? AppDelegate
+        moc = ad!.persistentContainer.viewContext
         
-        var dbOK = false
+        readingEntityDescription = NSEntityDescription.entity(forEntityName: "ReadingEntity", in: self.moc!)!
         
-        if sqlite3_open(dbFilePath, &db) == SQLITE_OK {
-            print("ok")
-            dbOK =  true
-        } else {
-            print("fail")
+        let sensorEntityDescription = NSEntityDescription.entity(forEntityName: "SensorEntity", in: self.moc!)!
+        
+        if(Sensor.readSensorsFromDB(moc: self.moc!, ad: self.ad!).count == 0) {
+            Sensor.generateSensors(moc: self.moc!, entity: sensorEntityDescription)
         }
         
-        if(dbOK){
+        self.sensors = Sensor.readSensorsFromDB(moc: self.moc!, ad: self.ad!)
+        self.readings = Reading.readReadingsFromDB(moc: self.moc!, ad: self.ad!)
         
-            if(!Sensor.tableExists(db: db)){
-                print("create table sensor")
-                sensors = Sensor.generateSensors()
-                Sensor.saveSensorsToDB(db: db, sensors: sensors)
-                sensors = Sensor.readSensorsFromDB(db: db)
-            } else {
-                sensors = Sensor.readSensorsFromDB(db: db)
-                print("reading sensors from db")
-            }
-            
-            if(!Reading.tableExists(db: db)){
-                print("table not exists or empty reading")
-               Reading.createTable(db: db)
-            } else {
-                print("data reading")
-              readings = Reading.readReadingsFromDB(db: db)
-            }
-            
-            let tbvc = tabBarController as! CustomTabBarController
-            tbvc.sensors = self.sensors
-            tbvc.readings = self.readings
-            tbvc.db = self.db
-            
-        }
+        let tbvc = tabBarController as! CustomTabBarController
+        tbvc.sensors = self.sensors
+        tbvc.readings = self.readings
         
         
     }
@@ -71,8 +52,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func deleteButton(_ sender: Any) {
-        Reading.deleteRecords(db: db)
         self.readings = []
+        Reading.deleteRecords(moc: self.moc!, ad: self.ad!)
         outputText.text = ""
         let tbvc = tabBarController as! CustomTabBarController
         tbvc.readings = self.readings
@@ -83,24 +64,13 @@ class ViewController: UIViewController {
     @IBAction func saveReadingButton(_ sender: Any) {
         let startTime = NSDate()
         
-    //    sqlite3_exec(db, "BEGIN", nil, nil, nil)
-        
-      //  var sqlString = "INSERT INTO readings (sensor_id, value, ts) vales "
-        
-        //execTime = NSDate() - execTime
-        
-        if self.readings.count > 0 {
-        Reading.saveReadingsToDB(db: db, readings: self.readings)
-        
-        
-        let tbvc = tabBarController as! CustomTabBarController
-        tbvc.readings = Reading.readReadingsFromDB(db: self.db)
-        
-        let finishTime = NSDate()
-        
-        print("saving files to database time: \(finishTime.timeIntervalSince(startTime as Date))")
+        if self.readingObjects.count > 0 {
+            let ctbc = tabBarController as! CustomTabBarController
+            Reading.saveReadingsToDB(moc: self.moc!, sensors: self.sensors, readings: self.readingObjects, entity: self.readingEntityDescription!)
+            ctbc.readings = Reading.readReadingsFromDB(moc: self.moc!, ad: self.ad!)
+            let finishTime = NSDate()
+            print("saving files to database time: \(finishTime.timeIntervalSince(startTime as Date))")
         }
-        
         
     }
     
@@ -110,7 +80,7 @@ class ViewController: UIViewController {
         let ts = Int(NSDate().timeIntervalSince1970)
         var output = ""
         
-        readings = []
+        self.readingObjects = []
         
         let time = NSDate().timeIntervalSince1970
         
@@ -118,22 +88,15 @@ class ViewController: UIViewController {
             let ts = time - Double(arc4random_uniform(31556926))
             let val = Double(arc4random_uniform(1000))
             let sensor = Int(arc4random_uniform(19))
-            self.readings.append(Reading(sensor: sensor, value: val, ts: Int(ts)))
             
+            self.readingObjects.append(Reading(sensor: sensor, value: val, ts: Int(ts)))
+                
             output += "sensor: \(sensor), "
             output += "value: \(val), "
             output += "timestamp: \(NSDate(timeIntervalSince1970: TimeInterval(ts)))\n"
         }
         
-        
-
         outputText.text = output
-        
-        
     }
-    
-    
-
-
 }
 

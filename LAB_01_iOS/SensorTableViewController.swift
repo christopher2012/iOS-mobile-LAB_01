@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class SensorTableViewController: UITableViewController {
 
     
-    var sensors: [Sensor] = []
+    var sensors: [NSManagedObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,9 +50,9 @@ class SensorTableViewController: UITableViewController {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "SensorTableViewCell", for: indexPath) as? SensorTableViewCell
         
-        cell?.nameText.text = sensors[indexPath.row].name
-        cell?.descText.text = sensors[indexPath.row].desc
-        
+        cell?.nameText.text = sensors[indexPath.row].value(forKey: "name") as? String
+        cell?.descText.text = sensors[indexPath.row].value(forKey: "desc") as? String
+    
         return cell!
     }
     

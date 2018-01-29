@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
 class ReadingsControllerTableViewController: UITableViewController {
 
-    var readings: [Reading] = []
+    var readings: [ReadingEntity] = []
+    var ad: AppDelegate? = nil
+    var moc: NSManagedObjectContext? = nil
+    var readingEntity: NSEntityDescription? = nil
     
     
     override func viewDidLoad() {
@@ -27,25 +31,25 @@ class ReadingsControllerTableViewController: UITableViewController {
         let tbvc = self.tabBarController as! CustomTabBarController
         readings = tbvc.readings
         self.tableView.reloadData()
-        let db = tbvc.db;
         
+        if readings.count > 0 {
         var startTime = NSDate()
-        let findMinMaxTimestampText = Reading.findMinMaxTimestamp(db: db)
+        let findMinMaxTimestampText = Reading.findMinMaxTimestamp()
         let findMinMaxTimestamp = NSDate().timeIntervalSince(startTime as Date)
         
         startTime = NSDate()
-        let avgReadingAllSensorsText = Reading.avgReadingAllSensors(db: db)
+        let avgReadingAllSensorsText = Reading.avgReadingAllSensors()
         let avgReadingAllSensors = NSDate().timeIntervalSince(startTime as Date)
         
         startTime = NSDate()
-        let readingsAvgEachSensorText = Reading.readingsAvgEachSensor(db: db)
+        let readingsAvgEachSensorText = Reading.readingsAvgEachSensor()
         let readingsAvgEachSensor = NSDate().timeIntervalSince(startTime as Date)
         
         print("Min and max timestamp: \(findMinMaxTimestampText), time: \(findMinMaxTimestamp)")
         print("Average readings from all sensors: \(avgReadingAllSensorsText), time: \(avgReadingAllSensors)")
         print("Number of readings and average value per each sensor: \(readingsAvgEachSensorText), time: \(readingsAvgEachSensor)")
         
-        
+        }
         
     }
 
@@ -70,9 +74,9 @@ class ReadingsControllerTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReadingTableViewCell", for: indexPath) as? ReadingTableViewCell
         
-        cell?.SensorText.text = "sensor: " + String(readings[indexPath.row].sensor)
-        cell?.ValueText.text = "value: " + String(readings[indexPath.row].value)
-        cell?.DateText.text = "date: " + String(describing: NSDate(timeIntervalSince1970: TimeInterval(readings[indexPath.row].ts)))
+        cell?.SensorText.text = "sensor: " + String(describing: readings[indexPath.row].sensor?.name)
+        cell?.ValueText.text = "value: " + String(describing: readings[indexPath.row].value)
+        cell?.DateText.text = "date: " + String(describing: NSDate(timeIntervalSince1970: TimeInterval(readings[indexPath.row].timestamp)))
 
         return cell!
         

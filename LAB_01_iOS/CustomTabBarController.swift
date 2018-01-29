@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class CustomTabBarController: UITabBarController {
     
-    var sensors: [Sensor] = []
-    var readings: [Reading] = []
+    var sensors: [SensorEntity] = []
+    var readings: [ReadingEntity] = []
     var db: OpaquePointer? = nil
 
     override func viewDidLoad() {

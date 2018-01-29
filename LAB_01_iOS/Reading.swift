@@ -6,6 +6,7 @@
 //  Copyright © 2018 wizner. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
 class Reading {
@@ -20,120 +21,146 @@ class Reading {
         self.value = value
     }
     
-    static func deleteRecords(db: OpaquePointer?) {
-        let delete = "delete from readings;"
-        var stmt: OpaquePointer? = nil
-        if(sqlite3_prepare_v2(db, delete, -1, &stmt, nil) == SQLITE_OK) {
-            if sqlite3_step(stmt) == SQLITE_DONE {
-                print("readings deleted!")
+    static func deleteRecords(moc: NSManagedObjectContext, ad :AppDelegate) {
+        let fetchedReadings: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: "ReadingEntity");
+               
+        do {
+            let readings = try moc.fetch(fetchedReadings)as! [NSManagedObject]
+            for reading in readings {
+                moc.delete(reading )
             }
+            
+            try moc.save()
+        } catch {
+            fatalError("error: \(error)")
         }
-        sqlite3_finalize(stmt)
+        
     }
     
-    static func readReadingsFromDB(db: OpaquePointer?) -> [Reading]{
-        var readings: [Reading] = []
+    static func readReadingsFromDB(moc: NSManagedObjectContext, ad: AppDelegate) -> [ReadingEntity]{
+        var readings: [ReadingEntity] = []
         
-        var stmt: OpaquePointer? = nil
-        let select = "select sensorid, value, timestamp from readings;"
-        if(sqlite3_prepare(db, select, -1, &stmt, nil) == SQLITE_OK){
-            while(sqlite3_step(stmt) == SQLITE_ROW) {
-                let sensorid = sqlite3_column_int(stmt, 0)
-                let value = sqlite3_column_double(stmt, 1)
-                let ts = sqlite3_column_int(stmt, 2)
-                readings.append(Reading(sensor: Int(sensorid), value: value, ts: Int(ts)))
-            }
-        }else{
-            let errorMessage = String.init(cString: sqlite3_errmsg(db))
-            print("prepared stmt could not be created \(errorMessage)")
+        let fetchedReadings: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: "ReadingEntity");
+        
+        do {
+            readings = try moc.fetch(fetchedReadings) as! [ReadingEntity]
+        } catch {
+            fatalError("error: \(error)")
         }
-        
-        
-        sqlite3_finalize(stmt)
         
         return readings
     }
     
-    static func createTable(db: OpaquePointer?) {
-        let createSQL = "CREATE TABLE readings(sensorid INTEGER, value NUMERIC, timestamp INTEGER);"
+    static func saveReadingsToDB(moc: NSManagedObjectContext, sensors: [SensorEntity], readings: [Reading], entity : NSEntityDescription) {
         
-        var stmt: OpaquePointer? = nil
-        if(sqlite3_prepare_v2(db, createSQL, -1, &stmt, nil) == SQLITE_OK) {
-            if sqlite3_step(stmt) == SQLITE_DONE {
-                print("READINGS table created")
-            }else {
-                print("readings table not created")
-            }
-        }else{
-            let errorMessage = String.init(cString: sqlite3_errmsg(db))
-            print("prepared stmt could not be created \(errorMessage)")
-        }
-        
-        sqlite3_finalize(stmt)
-    }
-    
-    static func saveReadingsToDB(db: OpaquePointer?, readings: [Reading]){
-        
-        var insertSQL = "INSERT INTO readings (timestamp, value, sensorid) VALUES "
         for reading in readings {
-            insertSQL += "(\"\(reading.ts)\", \"\(reading.value)\", \"\(reading.sensor)\"),";
+            let timestamp = reading.ts
+            let value = reading.value
+            let readingEntity: ReadingEntity = NSManagedObject(entity: entity, insertInto: moc) as! ReadingEntity
+            readingEntity.setValue(timestamp, forKey: "timestamp");
+            readingEntity.setValue(sensors[reading.sensor], forKey: "sensor");
+            readingEntity.setValue(value, forKey: "value");
         }
-        insertSQL = String(insertSQL.characters.dropLast())
-        insertSQL += ";"
-        
-        sqlite3_exec(db, insertSQL, nil, nil, nil)
-        
+        try? moc.save()
     }
     
     
-    static func avgReadingAllSensors(db: OpaquePointer?) -> Double {
-        let selectSQL = "select avg(value) from readings;"
-        var stmt: OpaquePointer? = nil
-        sqlite3_prepare_v2(db, selectSQL, -1, &stmt, nil)
-        sqlite3_step(stmt)
-        let avg = sqlite3_column_double(stmt, 0)
-        sqlite3_finalize(stmt)
-        return avg;
-    }
-    
-    static func readingsAvgEachSensor(db: OpaquePointer?) -> [String] {
-        let selectSQL = "Select sensor.name, count(readings.timestamp), avg(readings.value) from readings left join sensor ON sensorid=sensor.id group by sensor.name;"
-        var stmt: OpaquePointer? = nil
-        sqlite3_prepare_v2(db, selectSQL, -1, &stmt, nil)
-        sqlite3_step(stmt)
-        var results: [String] = []
-        while sqlite3_step(stmt) == SQLITE_ROW {
-            let sensorName = String(cString: sqlite3_column_text(stmt, 0))
-            let counter = sqlite3_column_int(stmt, 1)
-            let avg = sqlite3_column_double(stmt, 2)
-            let result = "Name " + sensorName + " ; readings: " + String(counter) + " ; avg: " + String(avg)
-            results.append(result);
+    static func avgReadingAllSensors() -> NSDictionary {
+        let ad = UIApplication.shared.delegate as? AppDelegate
+        let moc = ad!.persistentContainer.viewContext
+        var result: NSDictionary
+        
+        let readings = NSFetchRequest<NSFetchRequestResult>(entityName: "ReadingEntity");
+        
+        let valueKeyExp = NSExpression(forKeyPath: "value")
+        let avgExpression = NSExpression(forFunction: "average:", arguments: [valueKeyExp])
+        let countDesc = NSExpressionDescription()
+        countDesc.expression = avgExpression
+        countDesc.name = "average"
+        countDesc.expressionResultType = .doubleAttributeType
+        
+        readings.returnsObjectsAsFaults = false
+        readings.propertiesToFetch = [countDesc]
+        readings.resultType = .dictionaryResultType
+        
+        
+        do {
+            result = try moc.fetch(readings)[0] as! NSDictionary
+        } catch {
+            fatalError("Failed to fetch sensors: \(error)")
         }
-        sqlite3_finalize(stmt)
-        return results;
+        return result
     }
     
-    static func findMinMaxTimestamp(db: OpaquePointer?) -> String {
-        let selectSQL = "select MIN(timestamp), MAX(timestamp) from readings;"
-        var stmt: OpaquePointer? = nil
-        sqlite3_prepare_v2(db, selectSQL, -1, &stmt, nil)
-        sqlite3_step(stmt)
-        let min = sqlite3_column_double(stmt, 0)
-        let max = sqlite3_column_double(stmt, 1)
+    static func readingsAvgEachSensor() -> [NSDictionary] {
         
-        let value =  "Min: " + String(min) + "; Max: " + String(max)
-        sqlite3_finalize(stmt)
-        return value;
-    }
+        var ad = UIApplication.shared.delegate as? AppDelegate
+        let moc = ad!.persistentContainer.viewContext
+        var result: [NSDictionary]
         
-    static func tableExists(db: OpaquePointer?) -> Bool{
-        let select = "select count(*) from readings"
-        var stmt : OpaquePointer? = nil
-        sqlite3_prepare(db, select, -1, &stmt, nil)
-        if(sqlite3_step(stmt) == SQLITE_ROW) {
-            return true
-        }else {
-            return false
+        let readings = NSFetchRequest<NSFetchRequestResult>(entityName: "ReadingEntity");
+        
+        let valueKeyExp = NSExpression(forKeyPath: "value")
+        let countExpression = NSExpression(forFunction: "count:", arguments: [valueKeyExp])
+        let avgExpression = NSExpression(forFunction: "average:", arguments: [valueKeyExp])
+        let countDesc = NSExpressionDescription()
+        countDesc.expression = countExpression
+        countDesc.name = "count"
+        countDesc.expressionResultType = .integer64AttributeType
+        let avgDesc = NSExpressionDescription()
+        avgDesc.expression = avgExpression
+        avgDesc.name = "average"
+        avgDesc.expressionResultType = .integer64AttributeType
+        
+        readings.returnsObjectsAsFaults = false
+        readings.propertiesToGroupBy = ["sensor"]
+        readings.propertiesToFetch = [countDesc, avgDesc]
+        readings.resultType = .dictionaryResultType
+        
+        
+        do {
+            result = try moc.fetch(readings) as! [NSDictionary]
+        } catch {
+            fatalError("Failed to fetch sensors: \(error)")
         }
+        return result;
     }
+    
+    static func findMinMaxTimestamp() -> String {
+    
+        let ad = UIApplication.shared.delegate as? AppDelegate
+        let moc = ad!.persistentContainer.viewContext
+        var result = ""
+        
+        let readings = NSFetchRequest<NSFetchRequestResult>(entityName: "ReadingEntity");
+        
+        var sd = NSSortDescriptor(key: "timestamp", ascending: true);
+        
+        readings.sortDescriptors = [sd]
+        readings.fetchLimit = 1
+        
+        var readingEntities: [ReadingEntity] = []
+        
+        do {
+            readingEntities = try moc.fetch(readings) as! [ReadingEntity]
+        } catch {
+            fatalError("Failed to fetch sensors: \(error)")
+        }
+        
+        result = String(readingEntities[0].timestamp)
+        
+        sd = NSSortDescriptor(key: "timestamp", ascending: false);
+        readings.sortDescriptors = [sd]
+        
+        do {
+            readingEntities = try moc.fetch(readings) as! [ReadingEntity]
+        } catch {
+            fatalError("Failed to fetch sensors: \(error)")
+        }
+        
+        result += " " + String(readingEntities[0].timestamp)
+        
+        return result;
+    }
+
 }

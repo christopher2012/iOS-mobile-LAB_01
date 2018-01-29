@@ -22,6 +22,7 @@
 		AC41E4E41FFF7A2300E188D6 /* ReadingsControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC41E4E31FFF7A2300E188D6 /* ReadingsControllerTableViewController.swift */; };
 		AC41E4E61FFF7CE500E188D6 /* ReadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC41E4E51FFF7CE500E188D6 /* ReadingTableViewCell.swift */; };
 		AC7E6C512011F1590097048A /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E6C502011F1590097048A /* CustomTabBarController.swift */; };
+		ACA8307D201F317C00A91A98 /* Model3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ACA8307B201F317C00A91A98 /* Model3.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		AC41E4E31FFF7A2300E188D6 /* ReadingsControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingsControllerTableViewController.swift; sourceTree = "<group>"; };
 		AC41E4E51FFF7CE500E188D6 /* ReadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingTableViewCell.swift; sourceTree = "<group>"; };
 		AC7E6C502011F1590097048A /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		ACA8307C201F317C00A91A98 /* Model3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model3.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				AC176BCB1FE3C6550068EF74 /* AppDelegate.swift */,
+				ACA8307B201F317C00A91A98 /* Model3.xcdatamodeld */,
 				AC176BCD1FE3C6550068EF74 /* ViewController.swift */,
 				AC7E6C502011F1590097048A /* CustomTabBarController.swift */,
 				AC176BCF1FE3C6550068EF74 /* Main.storyboard */,
@@ -302,6 +305,7 @@
 				AC3B7A722008B6BC00703622 /* Reading.swift in Sources */,
 				AC41E4E21FFF777800E188D6 /* Sensor.swift in Sources */,
 				AC41E4E41FFF7A2300E188D6 /* ReadingsControllerTableViewController.swift in Sources */,
+				ACA8307D201F317C00A91A98 /* Model3.xcdatamodeld in Sources */,
 				AC176BCC1FE3C6550068EF74 /* AppDelegate.swift in Sources */,
 				AC7E6C512011F1590097048A /* CustomTabBarController.swift in Sources */,
 			);
@@ -574,6 +578,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		ACA8307B201F317C00A91A98 /* Model3.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				ACA8307C201F317C00A91A98 /* Model3.xcdatamodel */,
+			);
+			currentVersion = ACA8307C201F317C00A91A98 /* Model3.xcdatamodel */;
+			path = Model3.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AC176BC01FE3C6550068EF74 /* Project object */;
 }
