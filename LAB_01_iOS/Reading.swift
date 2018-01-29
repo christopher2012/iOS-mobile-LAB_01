@@ -97,7 +97,8 @@ class Reading {
     }
     
     static func readingsAvgEachSensor(db: OpaquePointer?) -> [String] {
-        let selectSQL = "Select sensor.name, count(readings.timestamp), avg(readings.value) from readings left join sensor ON sensorid=sensor.id group by sensor.name;"
+        let selectSQL = "Select sensor.name, count(readings.timestamp), avg(readings.value) 
+        from readings left join sensor ON sensorid=sensor.id group by sensor.name;"
         var stmt: OpaquePointer? = nil
         sqlite3_prepare_v2(db, selectSQL, -1, &stmt, nil)
         sqlite3_step(stmt)
